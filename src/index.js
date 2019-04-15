@@ -4,8 +4,8 @@ const cookeSession = require('cookie-session')
 const passport = require('passport')
 
 require('../models/User.js')
-const authRoutes = require('../routes/authRoutes.js')
 require('../services/passport.js')
+const authRoutes = require('../routes/authRoutes.js')
 const { mongoURI, cookieKey } = require('../config/keys.js')
 
 mongoose.connect('mongodb://127.0.0.1:27017/feedbackr-api', {
