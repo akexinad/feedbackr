@@ -1,5 +1,13 @@
 const express = require('express')
+const mongoose = require('mongoose')
+
+require('../models/User.js')
+
 require('../services/passport.js')
+
+const { mongoURI } = require('../config/keys.js')
+
+mongoose.connect(mongoURI)
 
 const PORT = process.env.PORT
 
