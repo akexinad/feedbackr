@@ -15,7 +15,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
     "env-cmd": "^8.0.2",
