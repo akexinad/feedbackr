@@ -7,7 +7,9 @@ require('../services/passport.js')
 
 const { mongoURI } = require('../config/keys.js')
 
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true
+})
 
 const PORT = process.env.PORT
 

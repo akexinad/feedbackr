@@ -6,6 +6,12 @@ const { googleClientID, googleClientSecret } = require('../config/keys.js')
 
 const User = mongoose.model('users')
 
+// the argument user is exactl whatever user gets pulled out after user attempts to sign in. Hence the lower case u.
+// NOTE: user.id !== profile.id. user.id is generate by mongo
+passport.serializeUser( (user, done) => {
+  done(null, user.id)
+})
+
 passport.use(
   new GoogleStrategy({
     clientID: googleClientID,
