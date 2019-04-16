@@ -6,22 +6,22 @@ const passport = require('passport')
 require('../models/User.js')
 require('../services/passport.js')
 const authRoutes = require('../routes/authRoutes.js')
-const { mongoURI, cookieKey } = require('../config/keys.js')
+const { MONGODB_URL, cookieKey } = require('../config/keys.js')
 
-mongoose.connect((process.env.MONGODB_URL), {
+mongoose.connect((MONGODB_URL), {
   useNewUrlParser: true,
   useCreateIndex: true, // Indexes the data in mongodb, allowing for quicker access.
   useFindAndModify: false
 })
 
-const PORT = process.env.PORT
+const PORT = 3001
 const app = express()
 
 // CONNECTING MIDDLEWARES
 app.use(
   cookeSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [cookieKey]
+    keys: [ cookieKey ]
   })
 )
 app.use(passport.initialize())
