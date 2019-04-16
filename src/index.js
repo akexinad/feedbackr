@@ -6,9 +6,9 @@ const passport = require('passport')
 require('../models/User.js')
 require('../services/passport.js')
 const authRoutes = require('../routes/authRoutes.js')
-const { MONGODB_URL, MONGODB_ATLAS_URI, cookieKey } = require('../config/keys.js')
+const { mongodbUri, mongodbAtlasUri, cookieKey } = require('../config/keys.js')
 
-mongoose.connect((MONGODB_ATLAS_URI), {
+mongoose.connect((mongodbAtlasUri), {
   useNewUrlParser: true,
   // useCreateIndex: true, // Indexes the data in mongodb, allowing for quicker access.
   // useFindAndModify: false
