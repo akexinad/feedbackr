@@ -8,7 +8,7 @@ require('../services/passport.js')
 const authRoutes = require('../routes/authRoutes.js')
 const { mongoURI, cookieKey } = require('../config/keys.js')
 
-mongoose.connect('mongodb://127.0.0.1:27017/feedbackr-api', {
+mongoose.connect((process.env.MONGODB_URL), {
   useNewUrlParser: true,
   useCreateIndex: true, // Indexes the data in mongodb, allowing for quicker access.
   useFindAndModify: false
