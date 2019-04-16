@@ -12,6 +12,7 @@ mongoose.connect(mongodbAtlasUri, {
   useNewUrlParser: true,
 })
 
+<<<<<<< HEAD
 // mongoose.connect((mongodbAtlasUri), {
 //   useNewUrlParser: true,
 //   useCreateIndex: true, // Indexes the data in mongodb, allowing for quicker access.
@@ -19,6 +20,9 @@ mongoose.connect(mongodbAtlasUri, {
 // })
 
 const PORT = 3001
+=======
+const PORT = process.env.PORT | 3001
+>>>>>>> 2f8614d... added env port
 const app = express()
 
 // CONNECTING MIDDLEWARES
