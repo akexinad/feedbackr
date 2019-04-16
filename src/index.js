@@ -8,11 +8,15 @@ require('../services/passport.js')
 const authRoutes = require('../routes/authRoutes.js')
 const { mongodbUri, mongodbAtlasUri, cookieKey } = require('../config/keys.js')
 
-mongoose.connect((mongodbAtlasUri), {
+mongoose.connect(mongodbAtlasUri, {
   useNewUrlParser: true,
-  useCreateIndex: true, // Indexes the data in mongodb, allowing for quicker access.
-  useFindAndModify: false
 })
+
+// mongoose.connect((mongodbAtlasUri), {
+//   useNewUrlParser: true,
+//   useCreateIndex: true, // Indexes the data in mongodb, allowing for quicker access.
+//   useFindAndModify: false
+// })
 
 const PORT = 3001
 const app = express()
