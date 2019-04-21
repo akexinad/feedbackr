@@ -19,7 +19,7 @@ class App extends Component {
           >
             Learn React
           </a>
-          <a href="http://localhost:3001/api/current_user" target="_blank">Sign inwith google</a>
+          <a href="/auth/google" target="_blank">Sign inwith google</a>
         </header>
       </div>
     );
