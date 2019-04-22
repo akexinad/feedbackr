@@ -1,9 +1,9 @@
 const proxy = require('http-proxy-middleware');
 
 module.exports = (app) => {
-    app.use(proxy(['/api', '/auth/google'],
-        {
-            target: 'http://localhost:3001'
-        }
-    ))
+  app.use(proxy(['/api', '/auth/google'],
+    {
+      target: 'http://localhost:3001'
+    }
+  ))
 };
