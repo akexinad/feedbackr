@@ -1,6 +1,37 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Header extends Component {
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+
+      case false:
+        return(<li>
+            <a
+              href="/auth/google"
+              target="_blank"
+            >
+              Login With Google
+            </a>
+          </li>
+        );
+
+      default:
+        return(
+          <li>
+            <a
+              href="/api/logout"
+              target="_blank"
+            >
+              Logout
+            </a>
+          </li>
+        );
+    }
+  }
+
   render() {
     return(
       <nav>
@@ -11,12 +42,7 @@ class Header extends Component {
             FeedBackr
           </a>
           <ul className="right">
-            <li>
-              <a
-              >
-                Login With Google
-              </a>
-            </li>
+            { this.renderContent() }
           </ul>
         </div>
       </nav>
@@ -24,15 +50,12 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  }
+}
 
-// <nav>
-//   <div class="nav-wrapper">
-//     <a href="#" class="brand-logo">Logo</a>
-//     <ul id="nav-mobile" class="right hide-on-med-and-down">
-//       <li><a href="sass.html">Sass</a></li>
-//       <li><a href="badges.html">Components</a></li>
-//       <li><a href="collapsible.html">JavaScript</a></li>
-//     </ul>
-//   </div>
-// </nav>
+export default connect(
+  mapStateToProps,
+)(Header);
