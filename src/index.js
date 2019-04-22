@@ -1,12 +1,14 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cookeSession = require('cookie-session')
-const passport = require('passport')
+const express = require('express');
+const mongoose = require('mongoose');
+const cookeSession = require('cookie-session');
+const passport = require('passport');
+const bodyParser = require('body-parser');
 
-require('../models/User.js')
-require('../services/passport.js')
-const authRoutes = require('../routes/authRoutes.js')
-const { mongodbUri, mongodbAtlasUri, cookieKey } = require('../config/keys.js')
+require('../models/User.js');
+require('../services/passport.js');
+const authRoutes = require('../routes/authRoutes.js');
+const billingRoutes = require('../routes/billingRoutes.js');
+const { mongodbUri, mongodbAtlasUri, cookieKey } = require('../config/keys.js');
 
 mongoose.connect((mongodbAtlasUri), {
   useNewUrlParser: true,
@@ -17,17 +19,19 @@ mongoose.connect((mongodbAtlasUri), {
 const PORT = process.env.PORT || 3001
 const app = express()
 
-// CONNECTING MIDDLEWARES
+// CONNECTING MIDDLEWARES //////////////////////
+app.use(bodyParser.json());
 app.use(
   cookeSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [ cookieKey ]
   })
-)
-app.use(passport.initialize())
-app.use(passport.session())
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-authRoutes(app)
+authRoutes(app);
+billingRoutes(app);
 
 app.listen(PORT, () => {
   console.log(`Server is up on http://localhost:${ PORT }`)
