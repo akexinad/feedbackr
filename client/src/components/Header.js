@@ -11,7 +11,6 @@ class Header extends Component {
         return(<li>
             <a
               href="/auth/google"
-              target="_blank"
             >
               Login With Google
             </a>
@@ -23,7 +22,6 @@ class Header extends Component {
           <li>
             <a
               href="/api/logout"
-              target="_blank"
             >
               Logout
             </a>
@@ -37,6 +35,7 @@ class Header extends Component {
       <nav>
         <div className="nav-wrapper">
           <a
+            href="/"
             className="left brand-logo"
           >
             FeedBackr
