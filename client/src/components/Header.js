@@ -12,7 +12,10 @@ class Header extends Component {
           </a>
           <ul className="right">
             <li>
-              <a>Login With Google</a>
+              <a
+              >
+                Login With Google
+              </a>
             </li>
           </ul>
         </div>
