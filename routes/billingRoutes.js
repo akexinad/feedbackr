@@ -1,12 +1,9 @@
 const keys = require('../config/keys.js');
 const stripe = require('stripe')(keys.stripeSecretKey);
+const requireLogin = require('../middlewares/requireLogin.js');
 
 module.exports = app => {
-  app.post('/api/stripe', async (req, res) => {
-    if (!req.user) {
-      return res.status(401).send({ error: 'You must log in!' });
-    }
-
+  app.post('/api/stripe', requireLogin, async (req, res) => {
     const creditCardCharge = await stripe.charges.create({
       amount: 500,
       currency: 'usd',
@@ -14,7 +11,8 @@ module.exports = app => {
       source: req.body.id
     });
 
-    // NOTE: Remember that you will always have access to the user model in request via the passport and sessions middlewares.
+    // NOTE: Remember that you will always have access to the User model in req via the passport and sessions middlewares.
+    // See workshop/express_js_flow
     req.user.credits += 5;
     const user = await req.user.save();
 
