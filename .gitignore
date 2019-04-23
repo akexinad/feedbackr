@@ -1,5 +1,3 @@
 node_modules
 workshop
 dev.js
-.env.development
-.env.production
