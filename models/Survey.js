@@ -7,6 +7,7 @@ const surveySchema = new Schema({
   title: String,
   body: String,
   subject: String,
+  //SUB-DOCUMENTS
   recipients: [RecipientSchema],
   yes: {
     Type: Number,
@@ -15,6 +16,13 @@ const surveySchema = new Schema({
   no: {
     Type: Number,
     default:0
+  },
+  dateSend: Date,
+  lastResponded: Date,
+  // ASSOCIATIONS / RELATIONSHIP FIELDS
+  _user: {
+    type: Schema.types.ObjectId,
+    ref: 'User'
   }
 });
 
