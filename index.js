@@ -4,11 +4,11 @@ const cookeSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 
-require('../models/User.js');
-require('../services/passport.js');
-const authRoutes = require('../routes/authRoutes.js');
-const billingRoutes = require('../routes/billingRoutes.js');
-const { mongodbUri, mongodbAtlasUri, cookieKey } = require('../config/keys.js');
+require('./models/User.js');
+require('./services/passport.js');
+const authRoutes = require('./routes/authRoutes.js');
+const billingRoutes = require('./routes/billingRoutes.js');
+const { mongodbUri, mongodbAtlasUri, cookieKey } = require('./config/keys.js');
 
 mongoose.connect((mongodbAtlasUri), {
   useNewUrlParser: true,
