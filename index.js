@@ -14,7 +14,7 @@ require('./services/passport.js');
 // ROUTES
 const authRoutes = require('./routes/authRoutes.js');
 const billingRoutes = require('./routes/billingRoutes.js');
-const serverRoutes = require('./routes/serverRoutes.js');
+const serveyRoutes = require('./routes/serveyRoutes.js');
 
 // DATABASE
 const { mongodbUri, mongodbAtlasUri, cookieKey } = require('./config/keys.js');
@@ -41,7 +41,7 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
-serverRoutes(app);
+serveyRoutes(app);
 
 if (process.env.NODE_ENV) {
   // Express will serve up production assets
