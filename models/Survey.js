@@ -21,7 +21,7 @@ const surveySchema = new Schema({
   lastResponded: Date,
   // ASSOCIATIONS / RELATIONSHIP FIELDS
   _user: {
-    type: Schema.types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   }
 });
