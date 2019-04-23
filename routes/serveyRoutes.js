@@ -12,6 +12,10 @@ module.exports = app => {
       title,
       subject,
       body,
-    })
+      // For recipients we need to transform an array of strings into an array of objects
+      recipients: recipients.split(',').map( email => ({ email }) ),
+      _user: req.user.id,
+      dateSent: Date.now()
+    });
   });
 };
