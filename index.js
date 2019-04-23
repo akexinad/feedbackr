@@ -5,6 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 
 require('./models/User.js');
+require('./models/Survey.js');
 require('./services/passport.js');
 const authRoutes = require('./routes/authRoutes.js');
 const billingRoutes = require('./routes/billingRoutes.js');
