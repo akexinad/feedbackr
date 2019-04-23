@@ -4,11 +4,19 @@ const cookeSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 
+//MODELS
 require('./models/User.js');
 require('./models/Survey.js');
+
+// AUTHENTICATION MIDDLEWARES
 require('./services/passport.js');
+
+// ROUTES
 const authRoutes = require('./routes/authRoutes.js');
 const billingRoutes = require('./routes/billingRoutes.js');
+const serverRoutes = require('./routes/serverRoutes.js');
+
+// DATABASE
 const { mongodbUri, mongodbAtlasUri, cookieKey } = require('./config/keys.js');
 
 mongoose.connect((mongodbAtlasUri), {
@@ -33,6 +41,7 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
+serverRoutes(app);
 
 if (process.env.NODE_ENV) {
   // Express will serve up production assets
