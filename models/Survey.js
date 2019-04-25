@@ -17,13 +17,13 @@ const surveySchema = new Schema({
     Type: Number,
     default:0
   },
-  dateSend: Date,
-  lastResponded: Date,
-  // ASSOCIATIONS / RELATIONSHIP FIELDS
+  // ASSOCIATIONS / RELATIONSHIP FIELD
   _user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  dateSend: Date,
+  lastResponded: Date
 });
 
 mongoose.model('surveys', surveySchema);
