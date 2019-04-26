@@ -8,6 +8,7 @@ import reduxThunk from 'redux-thunk'
 import App from './components/App.js';
 import reducers from './reducers'
 
+// development only axios helpers to test emails
 import axios from 'axios';
 window.axios = axios;
 
