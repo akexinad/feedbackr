@@ -6,8 +6,8 @@ import * as actions from '../actions';
 
 import Header from './Header.js';
 import Landing from './Landing.js';
+import Dashboard from './Dashboard.js';
 
-const Dashboard = () => <h2 style={{textAlign: 'center'}}>Dashboard</h2>
 const SurveryNew = () => <h2>SurveryNew</h2>
 
 class App extends Component {
