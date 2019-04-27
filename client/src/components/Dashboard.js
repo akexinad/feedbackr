@@ -11,5 +11,5 @@ export default function Dashboard() {
         </Link>
       </div>
     </div>
-  )
+  );
 }
