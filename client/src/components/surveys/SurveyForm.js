@@ -64,6 +64,19 @@ class SurveyForm extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  _.each(FIELDS, ({ name }) => {
+    if (!values[name]) {
+      errors[name] = `Missing input: ${ name }`
+    }
+  })
+
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: 'surveyForm'
 })(SurveyForm);
