@@ -4,7 +4,7 @@ export default (recipientEmails) => {
   const invalidEmails = recipientEmails
     .split(/[ ,]+/)
     .map( email => email.trim() )
-    .filter( email => emailRegex.test(email) === false )
+    .filter( email => email.length && emailRegex.test(email) === false )
 
   if (invalidEmails.length) {
     return `These emails are invalid: ${ invalidEmails }`;
