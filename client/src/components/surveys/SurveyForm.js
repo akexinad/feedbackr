@@ -4,7 +4,10 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 
+// utils
 import validateEmails from '../../utils/validateEmails.js';
+
+// Components
 import SurveyField from './SurveyField.js';
 
 const FIELDS = [
@@ -32,6 +35,7 @@ class SurveyForm extends Component {
       _.map(FIELDS, ({ label, name }) => {
         return (
           <Field
+            key={ name }
             component={ SurveyField }
             type="text"
             label={ label }
@@ -49,7 +53,10 @@ class SurveyForm extends Component {
           onSubmit={ this.props.handleSubmit( values => console.log(values) ) }
         >
           { this.renderFields() }
-          <Link className="red btn-flat left white-text">
+          <Link
+            to="/surveys"
+            className="red btn-flat left white-text"
+          >
             Cancel
           </Link>
           <button
