@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class SurveyFormReview extends Component {
-  render() {
-    return(
-      <div>
-        <h2>Please confirm your entries</h2>
-      </div>
-    );
-  };
+const SurveyFormReview = ({ onCancel }) => {
+  return (
+    <div>
+      <h2>Please confirm your entries</h2>
+      <button
+        className="yellow darken-3 btn-flat"
+        onClick={ onCancel }
+      >
+        Go Back
+      </button>
+    </div>
+  );
 }
 
 export default SurveyFormReview;
