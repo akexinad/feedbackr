@@ -88,5 +88,8 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: 'surveyForm'
+  // this tells redux how to name our key value pairs inside our redux-form reducer
+  form: 'surveyForm',
+  // When you click 'go back', the form data will not be deleted
+  destroyOnUnmount: false
 })(SurveyForm);
