@@ -1,5 +1,6 @@
 // SurveyNew shows SurveyForm and SurveyFormReview.
 import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
 
 // SurveyForm shows a form for a user to add input.
 import SurveyForm from './SurveyForm.js';
@@ -34,4 +35,7 @@ class SurveyNew extends Component {
   }
 }
 
-export default SurveyNew;
+// connecting reduxForm in order to dump form values when user clicks cancel.
+export default reduxForm({
+  form: 'surveyForm'
+})(SurveyNew);
