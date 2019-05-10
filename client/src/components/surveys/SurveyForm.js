@@ -1,38 +1,20 @@
 // SurveyForm shows a form for a user to add input.
-import _ from 'lodash';
+import _ from 'underscore';
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 
-// utils
+// misc files
 import validateEmails from '../../utils/validateEmails.js';
+import formFields from './formFields.js';
 
 // Components
 import SurveyField from './SurveyField.js';
 
-const FIELDS = [
-  {
-    label: 'Survey Title',
-    name: 'title'
-  },
-  {
-    label: 'Subject Line',
-    name: 'subject'
-  },
-  {
-    label: 'Email Body',
-    name: 'body'
-  },
-  {
-    label: 'Recipient List',
-    name: 'emails'
-  }
-];
-
 class SurveyForm extends Component {
   renderFields() {
     return (
-      _.map(FIELDS, ({ label, name }) => {
+      _.map(formFields, ({ label, name }) => {
         return (
           <Field
             key={ name }
@@ -77,7 +59,7 @@ function validate(values) {
 
   errors.emails = validateEmails(values.emails || '');
 
-  _.each(FIELDS, ({ name }) => {
+  _.each(formFields, ({ name }) => {
     if (!values[name]) {
       errors[name] = `Missing input: ${ name }`
     }

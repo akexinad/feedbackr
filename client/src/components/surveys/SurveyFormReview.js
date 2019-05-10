@@ -1,10 +1,26 @@
+import _ from 'underscore'
 import React from 'react';
 import { connect } from 'react-redux';
 
-const SurveyFormReview = ({ onCancel }) => {
+import formFields from './formFields.js';
+
+const SurveyFormReview = ({ onCancel, formValues }) => {
+
+  const reviewFeilds = _.map(formFields, field => {
+    return (
+      <div key={field.name} >
+        <label>{ field.label }</label>
+        <div>
+          { formValues[field.name] }
+        </div>
+      </div>
+    )
+  })
+
   return (
     <div>
-      <h2>Please confirm your entries</h2>
+      <h3>Please confirm your entries</h3>
+      { reviewFeilds }
       <button
         className="yellow darken-3 btn-flat"
         onClick={ onCancel }
