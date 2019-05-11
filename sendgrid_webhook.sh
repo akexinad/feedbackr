@@ -1,5 +1,5 @@
 function localtunnel {
-  lt -s bdefhsakxdciqpow --port 5000
+  lt -s bdefhsakxdciqpow --port 3001
 }
 until localtunnel; do
 echo "localtunnel server crashed"

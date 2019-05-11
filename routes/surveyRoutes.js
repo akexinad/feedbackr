@@ -1,3 +1,6 @@
+const _ = require('lodash');
+const Path = require('path-parser').default;
+const { URL } = require('url');
 const mongoose = require('mongoose');
 
 const requireLogin = require('../middlewares/requireLogin.js');
@@ -13,10 +16,35 @@ module.exports = app => {
   })
   
   app.post('/api/surveys/webhooks', (req, res) => {
-    console.log(req.body);
+    // We need to do some data cleaning to ensure we filter only the events that are 'click' events and that they are UNIQUE, one event per user.
+    const events = _.chain(req.body)
+      .map( (event) => {
+
+        const pathName = new URL(event.url).pathname;
+        
+        // We need to extract the survey id and the user's choice.
+        const path = new Path('/api/surveys/:surveyId/:choice');
+        const match = path.test(pathName);
+
+        if (match) {
+          return {
+            email: event.email,
+            surveyId: match.surveyId,
+            choice: match.choice
+          };
+        }
+      })
+      // remove undefined values
+      .compact()
+      // return unique values
+      .uniqBy('email', 'surveyId')
+      .value();
+
+    console.log(events);
+    
     res.send({});
   });
-  
+
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
