@@ -11,12 +11,29 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate.js');
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
+
+  // Retreiving surveys that belong to a user.
+  //requireLogin checks authentication
+  app.get('/api/surveys', requireLogin, async (req, res) => {
+
+    // .select({}) filters the query so we dont return unncecessary recipient data and thus we optimise the data that we return.
+    const surveys = await Survey
+    .find({
+      _user: req.user.id
+    })
+    .select({
+      recipients: false
+    });
+
+    res.send(surveys);
+  });
+
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
-  })
+  });
 
   app.post('/api/surveys/webhooks', (req, res) => {
-    // We need to do some data cleaning to ensure we filter only the events that are 'click' events and that they are UNIQUE, one event per user.
+    // We need to do some data cleaning to ensure we filter only the events that are 'click' events as well as they're UNIQUENESS, i.e., one event per user.
     _.chain(req.body)
       .map( (event) => {
 
@@ -63,7 +80,9 @@ module.exports = app => {
     res.send({});
   });
 
+  // Creating a new survey requires authentication [requireLogin] and credits [requireCredits].
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
+
     const { title, subject, body, recipients } = req.body;
 
     const survey = new Survey({
@@ -92,5 +111,4 @@ module.exports = app => {
       res.status(422).send(error);
     }
   });
-
 };

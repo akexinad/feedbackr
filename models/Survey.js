@@ -15,7 +15,7 @@ const surveySchema = new Schema({
   },
   no: {
     Type: Number,
-    default:0
+    default: 0
   },
   // ASSOCIATIONS / RELATIONSHIP FIELD
   _user: {
