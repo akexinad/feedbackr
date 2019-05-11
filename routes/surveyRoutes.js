@@ -11,17 +11,17 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate.js');
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-  app.get('/api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   })
-  
+
   app.post('/api/surveys/webhooks', (req, res) => {
     // We need to do some data cleaning to ensure we filter only the events that are 'click' events and that they are UNIQUE, one event per user.
-    const events = _.chain(req.body)
+    _.chain(req.body)
       .map( (event) => {
 
         const pathName = new URL(event.url).pathname;
-        
+
         // We need to extract the survey id and the user's choice.
         const path = new Path('/api/surveys/:surveyId/:choice');
         const match = path.test(pathName);
@@ -38,10 +38,28 @@ module.exports = app => {
       .compact()
       // return unique values
       .uniqBy('email', 'surveyId')
+      .each( ({ surveyId, email, choice }) => {
+        Survey.updateOne({
+          _id: surveyId,
+          recipients: {
+            $elemMatch: {
+              email: email,
+              responded: false
+            }
+          }
+        }, {
+          // Increment the choice the user made by 1
+          // The [choice] syntax is ES6 syntax.
+          // The $ are mongo operators. See documentation:
+          // https://docs.mongodb.com/manual/reference/operator/update/
+          $inc: { [choice]: 1 },
+          // The $ here corresponds to the query match made in the $elemMatch above.
+          $set: { 'recipients.$.responded': true },
+          lastResponded: new Date()
+        }).exec();
+      })
       .value();
 
-    console.log(events);
-    
     res.send({});
   });
 
